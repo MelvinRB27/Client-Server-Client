@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client-Server-Client</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+    <div id="chat-app" class="card">
+
+        <h1 v-if="!disabled">Connect</h1> <!-- Se muestra cuando el cliente está desconectado -->
+        <h1 v-if="disabled">Client-Server-Client</h1> <!-- Se muestra cuando el cliente está conectado -->
+        
+        <h3 v-if="online > 0">Usuario Conectado: {{username}}</h3> <!-- Muesta el usuario que se acaba de conectar -->
+
+        <h5 v-if="!disabled">Ingrese su usuario</h5> 
+
+        <input type="text" v-model="username" id="username" placeholder="Username"/> 
+        <button v-on:click="connect" v-if="!disabled" id="connect">Connect</button> 
+        <button v-on:click="leave" v-if="disabled" id="connect">Leave</button>  <!-- cuando este conectado aparecerá un boton de desconectarse -->
+
+        <form  id="formFile" method="post" enctype="multipart/form-data" v-if="online > 0">
+
+            <hr/>
+            <h1>Send File</h1>
+            <hr/>
+
+                
+            <label for="file"><strong>User</strong></label>
+            <input  type="text" v-model="target" id="target" name="target" required placeholder="To:"/>
+
+            <label for="file"><strong>File</strong></label>
+            <input v-model="file" type="file" id="file" name="file" required placeholder="File"></input>
+
+
+            <button @click="submit" type="submit">Send</button>
+        
+        </form>
+
+    </div>
+
+    <!--VUE -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <!--JS -->
+    <script src="index.js"></script>
+</body>
+</html>
